@@ -2,10 +2,25 @@ from otree.api import Currency as c, currency_range
 from ._builtin import Page, WaitPage
 from .models import Constants
 
-
-class MyPage(Page):
+class Bienvenido(Page):
     pass
 
+class primeraPregunta(Page):
+    form_model = 'player'
+
+    def is_displayed(self):
+        return self.round_number == self.participant.vars['task_rounds']['1']
+
+
+class segundaPregunta(Page):
+    form_model = 'player'
+    form_fields = ['rta_2']
+
+    def is_displayed(self):
+        return self.round_number == self.participant.vars['task_rounds']['2']
+
+class Gracias(Page):
+    pass
 
 class ResultsWaitPage(WaitPage):
 
@@ -13,12 +28,9 @@ class ResultsWaitPage(WaitPage):
         pass
 
 
-class Results(Page):
-    pass
-
-
 page_sequence = [
-    MyPage,
-    ResultsWaitPage,
-    Results
+    Bienvenido,
+    primeraPregunta,
+    segundaPregunta,
+    Gracias
 ]

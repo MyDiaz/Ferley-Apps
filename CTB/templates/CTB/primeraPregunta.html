@@ -1,0 +1,94 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Pregunta 1
+{% endblock %}
+
+{% block content %}
+
+<style>
+    .otree-title{
+        font-size: 32px;
+     }
+</style>
+
+    <img  class="img" src = "{% static 'CTB/opc1primera.png' %}"/>
+    <button type="button" id="rta_1_1" class="btn btn-primary" value="1">Seleccionar 1</button>
+    <br>
+    <img  class="img" src = "{% static 'CTB/opc2primera.png' %}"/>
+    <button type="button" id="rta_1_2" class="btn btn-primary" value="2">Seleccionar 2</button>
+    <br>
+    <img  class="img" src = "{% static 'CTB/opc3primera.png' %}"/>
+    <button type="button" id="rta_1_3" class="btn btn-primary" value="3">Seleccionar 3</button>
+    <br>
+    <img  class="img" src = "{% static 'CTB/opc4primera.png' %}"/>
+    <button type="button" id="rta_1_4" class="btn btn-primary" value="4">Seleccionar 4</button>
+    <br>
+    <img  class="img" src = "{% static 'CTB/opc5primera.png' %}"/>
+    <button type="button" id="rta_1_5" class="btn btn-primary" value="5">Seleccionar 5</button>
+    <br>
+    <img  class="img" src = "{% static 'CTB/opc6primera.png' %}"/>
+    <button type="button" id="rta_1_6" class="btn btn-primary" value="6">Seleccionar 6</button>
+
+    <button type="button" id="sig" class="btn btn-primary">Siguiente</button>
+
+        <div style="display: none;">
+          <p id="respuesta"></p>
+          <button id="1" name="rta_1" value="1" ></button>
+          <button id="2" name="rta_1" value="2" ></button>
+          <button id="3" name="rta_1" value="3" ></button>
+          <button id="4" name="rta_1" value="4" ></button>
+          <button id="5" name="rta_1" value="5" ></button>
+          <button id="6" name="rta_1" value="6" ></button>
+        </div>
+
+    <script>
+        function rta_1_1(){document.getElementById("respuesta").innerHTML = "1";}
+        function rta_1_2(){document.getElementById("respuesta").innerHTML = "2";}
+        function rta_1_3(){document.getElementById("respuesta").innerHTML = "3";}
+        function rta_1_4(){document.getElementById("respuesta").innerHTML = "4";}
+        function rta_1_5(){document.getElementById("respuesta").innerHTML = "5";}
+        function rta_1_6(){document.getElementById("respuesta").innerHTML = "6";}
+
+        function avanzar()
+        {
+            if(document.getElementById("respuesta").innerHTML == "1")
+            {
+                document.getElementById("1").click()
+            }
+            else if (document.getElementById("respuesta").innerHTML == "2")
+            {
+                document.getElementById("2").click()
+            }
+            else if (document.getElementById("respuesta").innerHTML == "3")
+            {
+                document.getElementById("3").click()
+            }
+            else if (document.getElementById("respuesta").innerHTML == "4")
+            {
+                document.getElementById("4").click()
+            }
+            else if (document.getElementById("respuesta").innerHTML == "5")
+            {
+                document.getElementById("5").click()
+            }
+            else if (document.getElementById("respuesta").innerHTML == "6")
+            {
+                document.getElementById("6").click()
+            }
+        }
+
+        document.getElementById("rta_1_1").onclick=rta_1_1;
+        document.getElementById("rta_1_2").onclick=rta_1_2;
+        document.getElementById("rta_1_3").onclick=rta_1_3;
+        document.getElementById("rta_1_4").onclick=rta_1_4;
+        document.getElementById("rta_1_5").onclick=rta_1_5;
+        document.getElementById("rta_1_6").onclick=rta_1_6;
+        document.getElementById("sig").onclick = avanzar;
+
+    </script>
+
+{% endblock %}
+
+

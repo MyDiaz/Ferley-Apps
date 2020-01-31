@@ -5,6 +5,14 @@ from os import environ
 # the session config can be accessed from methods in your apps as self.session.config,
 # e.g. self.session.config['participation_fee']
 
+# the environment variable OTREE_PRODUCTION controls whether Django runs in
+# DEBUG mode. If OTREE_PRODUCTION==1, then DEBUG=False
+environ.__setitem__('OTREE_PRODUCTION','1') ################
+if environ.get('OTREE_PRODUCTION') not in {None, '', '0'}:
+    DEBUG = False
+else:
+    DEBUG = True
+
 SESSION_CONFIG_DEFAULTS = {
     'real_world_currency_per_point': 1.00,
     'participation_fee': 0.00,
@@ -12,21 +20,24 @@ SESSION_CONFIG_DEFAULTS = {
 }
 
 SESSION_CONFIGS = [
-    #{
-    #    'name': 'public_goods',
-    #    'display_name': "Public Goods",
-    #    'num_demo_participants': 3,
-    #    'app_sequence': ['public_goods', 'payment_info'],
-    #},
+    {
+        'name':'CTB',
+        'display_name': 'encuesta',
+        'num_demo_participants':1,
+        'app_sequence': ['CTB'],
+        'Rounds':None,
+        'doc':"""
+        """
+    }
 ]
 
 
 # ISO-639 code
 # for example: de, fr, ja, ko, zh-hans
-LANGUAGE_CODE = 'en'
+LANGUAGE_CODE = 'es'
 
 # e.g. EUR, GBP, CNY, JPY
-REAL_WORLD_CURRENCY_CODE = 'USD'
+REAL_WORLD_CURRENCY_CODE = 'COP'
 USE_POINTS = True
 
 ROOMS = []

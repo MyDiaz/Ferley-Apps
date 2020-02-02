@@ -4,35 +4,36 @@
 
 
 {% block title %}
-    Pregunta 2
+    Pregunta #2
 {% endblock %}
 
 {% block content %}
 
 <style>
     .otree-title{
-        font-size: 32px;
+        font-size: 50px;
      }
 </style>
 
-    <img  class="img" src = "{% static 'CTB/opc1primera.png' %}"/>
-    <button type="button" id="rta_2_1" class="btn btn-primary" value="1">Seleccionar 1</button>
+<script>
+    function btn(i){
+        document.getElementById("rta_2").value = i;
+    }
+</script>
+
+    <img  class="img" src = "{% static 'CTB/opc1segunda.PNG' %}"/>
+    <button type="button" class="btn btn-outline-success" onclick="btn(1)">Seleccionar 1</button>
     <br>
-    <img  class="img" src = "{% static 'CTB/opc2primera.png' %}"/>
-    <button type="button" id="rta_2_2" class="btn btn-primary" value="2">Seleccionar 2</button>
+    <img  class="img" src = "{% static 'CTB/opc2segunda.PNG' %}"/>
+    <button type="button" class="btn btn-outline-success" onclick="btn(2)">Seleccionar 2</button>
     <br>
-    <img  class="img" src = "{% static 'CTB/opc3primera.png' %}"/>
-    <button type="button" id="rta_2_3" class="btn btn-primary" value="3">Seleccionar 3</button>
+    <img  class="img" src = "{% static 'CTB/opc3segunda.PNG' %}"/>
+    <button type="button" class="btn btn-outline-success" onclick="btn(3)">Seleccionar 3</button>
     <br>
-    <img  class="img" src = "{% static 'CTB/opc4primera.png' %}"/>
-    <button type="button" id="rta_2_4" class="btn btn-primary" value="4">Seleccionar 4</button>
-    <br>
-    <img  class="img" src = "{% static 'CTB/opc5primera.png' %}"/>
-    <button type="button" id="rta_2_5" class="btn btn-primary" value="5">Seleccionar 5</button>
-    <br>
-    <img  class="img" src = "{% static 'CTB/opc6primera.png' %}"/>
-    <button type="button" id="rta_2_6" class="btn btn-primary" value="6">Seleccionar 6</button>
-    <br>
+    <img  class="img" src = "{% static 'CTB/opc4segunda.PNG' %}"/>
+    <button type="button" class="btn btn-outline-success" onclick="btn(4)">Seleccionar 4</button>
+
+    <input type="hidden" name="rta_2" id="rta_2" />
 
     {% next_button %}
 

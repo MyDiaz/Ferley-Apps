@@ -14,18 +14,11 @@ Your app description
 class Constants(BaseConstants):
     name_in_url = 'CTB'
     players_per_group = None
-    tasks = ['1', '2']
-    num_rounds = len(tasks)
+    num_rounds = 1
 
 
 class Subsession(BaseSubsession):
-    def creating_session(self):
-        if self.round_number == 1:
-            for p in self.get_players():
-                round_numbers = list(range(1, Constants.num_rounds+1))
-                random.shuffle(round_numbers)
-                p.participant.vars['task_rounds'] = dict(zip(Constants.tasks, round_numbers))
-
+    pass
 
 
 class Group(BaseGroup):

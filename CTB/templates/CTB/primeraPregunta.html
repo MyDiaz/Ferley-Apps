@@ -11,29 +11,35 @@
     .otree-title{
         font-size: 32px;
      }
+    .otree-btn{
+        float: right;
+    }
 </style>
 
 <script>
     function btn(i){
         document.getElementById("rta_1").value = i;
     }
+    function confirmar(){
+        alert("Esta seguro que desea seleccionar esa opción?");
+    }
 </script>
 
     <img  class="img" src = "{% static 'CTB/opc1primera.png' %}"/>
-    <button type="button" class="btn btn-outline-success" onclick="btn(1)">Seleccionar 1</button>
+    <button type="button" class="btn btn-outline-success" onclick="btn(1)">Opción 1</button>
     <br>
     <img  class="img" src = "{% static 'CTB/opc2primera.png' %}"/>
-    <button type="button" class="btn btn-outline-success" onclick="btn(2)">Seleccionar 2</button>
+    <button type="button" class="btn btn-outline-success" onclick="btn(2)">Opción 2</button>
     <br>
     <img  class="img" src = "{% static 'CTB/opc3primera.png' %}"/>
-    <button type="button" class="btn btn-outline-success" onclick="btn(3)">Seleccionar 3</button>
+    <button type="button" class="btn btn-outline-success" onclick="btn(3)">Opción 3</button>
     <br>
     <img  class="img" src = "{% static 'CTB/opc4primera.png' %}"/>
-    <button type="button" class="btn btn-outline-success" onclick="btn(4)">Seleccionar 4</button>
+    <button type="button" class="btn btn-outline-success" onclick="btn(4)">Opción 4</button>
 
     <input type="hidden" name="rta_1" id="rta_1" />
-    <br>
-    {% next_button %}
+
+    <button class="btn btn-primary otree-btn" onclick="confirmar()"> Siguiente </button>
 
 {% endblock %}
 

@@ -15,6 +15,7 @@ class Constants(BaseConstants):
     name_in_url = 'CTB'
     players_per_group = None
     num_rounds = 1
+    semanas = 5
 
 
 class Subsession(BaseSubsession):

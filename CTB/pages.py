@@ -17,6 +17,7 @@ class segundaPregunta(Page):
     form_fields = ['rta_2']
 
 
+
 class Gracias(Page):
     pass
 

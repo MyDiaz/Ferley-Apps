@@ -13,28 +13,66 @@
     .otree-title{
         font-size: 50px;
      }
+    .otree-btn{
+        float: right;
+     }
 </style>
 
 <script>
     function btn(i){
         document.getElementById("rta_2").value = i;
     }
+    function confirmar(){
+        alert("Esta seguro que desea seleccionar esa opción?");
+    }
+    function clickaction(b){
+        switch( b.id ){
+           case "1": {
+              document.getElementById("select-text").innerHTML =
+                "<p> Usted seleccionó la {{player.rta_2}}, hoy recibé $18.000 y en {{Constants.semanas}} semanas, rebirá $0</p>
+                </br> Para un total de $18.000 </p>";
+              break;
+           }
+           case "2": {
+              document.getElementById("select-text").innerHTML =
+                "<p> Usted seleccionó la {{player.rta_2}}, hoy recibé $14.400 y en {{Constants.semanas}} semanas, rebirá $4.000</p>
+                </br> Para un total de $18.400 </p>";
+              break;
+           }
+           case "3":  {
+              document.getElementById("select-text").innerHTML =
+                "<p> Usted seleccionó la {{player.rta_2}}, hoy recibé $10.800 y en {{Constants.semanas}} semanas, rebirá $8.000</p>
+                </br> Para un total de $18.800 </p>";
+              break;
+           }
+           case "4": {
+              document.getElementById("select-text").innerHTML =
+                "<p>Usted seleccionó la opción 4, hoy recibé 7.200 y en {{Constants.semanas}} semanas, rebirá $12.000</p>
+                </br> Para un total de $19.200 </p>";
+              break;
+           }
+        }
+    }
+
 </script>
 
     <img  class="img" src = "{% static 'CTB/opc1segunda.PNG' %}"/>
-    <button type="button" class="btn btn-outline-success" onclick="btn(1)">Seleccionar 1</button>
+    <button  type="button" class="btn btn-outline-success" onclick="btn(1); clickaction(b)">Opción 1</button>
     <br>
     <img  class="img" src = "{% static 'CTB/opc2segunda.PNG' %}"/>
-    <button type="button" class="btn btn-outline-success" onclick="btn(2)">Seleccionar 2</button>
+    <button type="button" class="btn btn-outline-success" onclick="btn(2); clickaction(b)">Opción 2</button>
     <br>
     <img  class="img" src = "{% static 'CTB/opc3segunda.PNG' %}"/>
-    <button type="button" class="btn btn-outline-success" onclick="btn(3)">Seleccionar 3</button>
+    <button type="button" class="btn btn-outline-success" onclick="btn(3); clickaction(b)">Opción 3</button>
     <br>
     <img  class="img" src = "{% static 'CTB/opc4segunda.PNG' %}"/>
-    <button type="button" class="btn btn-outline-success" onclick="btn(4)">Seleccionar 4</button>
+    <button type="button" class="btn btn-outline-success" onclick="btn(4); clickaction(b)">Opción 4</button>
+    <br>
+
+    <p id="select-text"> </p>
 
     <input type="hidden" name="rta_2" id="rta_2" />
-    <br>
-    {% next_button %}
+
+    <button class="btn btn-primary otree-btn" onclick="confirmar()"> Siguiente </button>
 
 {% endblock %}

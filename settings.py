@@ -7,7 +7,7 @@ from os import environ
 
 # the environment variable OTREE_PRODUCTION controls whether Django runs in
 # DEBUG mode. If OTREE_PRODUCTION==1, then DEBUG=False
-environ.__setitem__('OTREE_PRODUCTION','1') ################
+environ.__setitem__('OTREE_PRODUCTION','0') ################
 if environ.get('OTREE_PRODUCTION') not in {None, '', '0'}:
     DEBUG = False
 else:

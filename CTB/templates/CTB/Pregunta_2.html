@@ -1,0 +1,131 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree %}
+{% load otree static %}
+
+
+{% block title %}
+    Pregunta #2
+{% endblock %}
+
+{% block content %}
+
+<style>
+    .otree-title{
+        font-size: 50px;
+     }
+    .otree-btn{
+        float: right;
+     }
+     .opcion{
+        font-size: 20px;
+    }
+    td.ancho {
+        width: 50px;
+    }
+</style>
+
+
+
+<script>
+    function btn(i){
+        document.getElementById("rta_2").value = i;
+    }
+    function confirmar(){
+        alert("Esta seguro que desea seleccionar esa opción?");
+    }
+    function clickaction(b){
+
+        switch(b){
+           case 1: {
+              document.getElementById("select-text").innerHTML =
+                "<p> Usted seleccionó la opción 1, hoy recibé $45.045 y en {{Constants.semanas}}\
+                 semanas, rebirá $0. </br> Para un total de $45.045. </p>";
+              break;
+           }
+           case 2: {
+              document.getElementById("select-text").innerHTML =
+                "<p> Usted seleccionó la opción 2, hoy recibé $36.036 y en {{Constants.semanas}}\
+                 semanas, rebirá $10.000. </br> Para un total de $46.036. </p>";
+              break;
+           }
+           case 3:  {
+              document.getElementById("select-text").innerHTML =
+                "<p> Usted seleccionó la opción 3, hoy recibé $27.027 y en {{Constants.semanas}}\
+                 semanas, rebirá $20.000. </br> Para un total de $47.027. </p>";
+              break;
+           }
+           case 4: {
+              document.getElementById("select-text").innerHTML =
+                "<p>Usted seleccionó la opción 4, hoy recibé $18.018 y en {{Constants.semanas}}\
+                 semanas, rebirá $30.000. </br> Para un total de $48.018. </p>";
+              break;
+           }
+           case 5: {
+              document.getElementById("select-text").innerHTML =
+                "<p>Usted seleccionó la opción 5, hoy recibé $9.009 y en {{Constants.semanas}}\
+                 semanas, rebirá $40.000. </br> Para un total de $49.009. </p>";
+              break;
+           }
+           case 6: {
+              document.getElementById("select-text").innerHTML =
+                "<p>Usted seleccionó la opción 6, hoy recibé $0 y en {{Constants.semanas}}\
+                 semanas, rebirá $50.000. </br> Para un total de $50.000. </p>";
+              break;
+           }
+        }
+    }
+
+</script>
+
+    <table class="table">
+        <tr>
+            <td rowspan="6" class="col-sm-4 ancho"> <img src = "{% static 'CTB/2.PNG' %}" alt=""> </td>
+            <td>
+                <button type="button" class="btn btn-outline-success" onclick="btn(1); clickaction(1)">
+                    Opción 1
+                </button>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button type="button" class="btn btn-outline-success" onclick="btn(2); clickaction(2)">
+                    Opción 2
+                </button>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button type="button" class="btn btn-outline-success" onclick="btn(3); clickaction(3)">
+                    Opción 3
+                </button>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button type="button" class="btn btn-outline-success" onclick="btn(4); clickaction(4)">
+                    Opción 4
+                </button>
+            </td>
+        </tr>
+        <tr>
+            <td> <button type="button" class="btn btn-outline-success" onclick="btn(5); clickaction(5)">
+                    Opción 5
+                </button>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button type="button" class="btn btn-outline-success" onclick="btn(6); clickaction(6)">
+                    Opción 6
+                </button>
+            </td>
+        </tr>
+    </table>
+
+    <p class="opcion" id="select-text"> </p>
+
+    <input type="hidden" name="rta_2" id="rta_2" />
+
+    <button class="btn btn-primary otree-btn" onclick="confirmar()"> Siguiente </button>
+
+{% endblock %}

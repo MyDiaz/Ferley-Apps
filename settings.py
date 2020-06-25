@@ -20,6 +20,14 @@ SESSION_CONFIG_DEFAULTS = {
 }
 
 SESSION_CONFIGS = [
+dict(
+        name='hl_mpl',
+        display_name='Risk Lottery',
+        num_demo_participants=10,
+        app_sequence=['hl_mpl'],
+        num_choices=8,
+        multiplier=10,
+    ),
     {
         'name':'CTB',
         'display_name': 'encuesta',
@@ -28,7 +36,29 @@ SESSION_CONFIGS = [
         'Rounds':None,
         'doc':"""
         """
+    },
+    {
+        'name':'otdm_master',
+        'display_name': 'otdm',
+        'num_demo_participants':1,
+        'app_sequence': ['otdm_master'],
+        'Rounds':None,
+        'doc':"""
+        """
+    },
+    {
+        'name': 'mpl',
+        'display_name': 'MultiplePriceList (Holt/Laury)',
+        'num_demo_participants': 1,
+        'app_sequence': ['mpl']
+    },
+    {
+        'name': 'otime',
+        'display_name': 'otime',
+        'num_demo_participants': 1,
+        'app_sequence': ['otime']
     }
+
 ]
 
 
@@ -52,3 +82,10 @@ SECRET_KEY = 'jtq+07qbt-tvcu(si_j6-&2m2x-*d6btl0qbwss*(pkv6l#$p0'
 
 # if an app is included in SESSION_CONFIGS, you don't need to list it here
 INSTALLED_APPS = ['otree']
+
+#variables to otdm game
+#: The total number of weeks
+NUM_WEEKS = 52
+
+#: The gain to be paid out per week
+GAIN_PER_WEEK = 20

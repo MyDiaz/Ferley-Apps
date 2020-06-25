@@ -38,37 +38,37 @@
         switch(b){
             case 1: {
               document.getElementById("select-text").innerHTML =
-                "<p> Usted seleccionó la opción 1, hoy recibé $34.965 y en {{Constants.semanas}}\
+                "<p> Usted seleccionó la opción 1, hoy recibe $34.965 y en {{Constants.semanas}}\
                  semanas, rebirá $0. </br> Para un total de $34.965. </p>";
               break;
            }
            case 2: {
               document.getElementById("select-text").innerHTML =
-                "<p> Usted seleccionó la opción 2, hoy recibé $27.972 y en {{Constants.semanas}}\
+                "<p> Usted seleccionó la opción 2, hoy recibe $27.972 y en {{Constants.semanas}}\
                  semanas, rebirá $10.000. </br> Para un total de $37.972. </p>";
               break;
            }
            case 3:  {
               document.getElementById("select-text").innerHTML =
-                "<p> Usted seleccionó la opción 3, hoy recibé $20.979 y en {{Constants.semanas}}\
+                "<p> Usted seleccionó la opción 3, hoy recibe $20.979 y en {{Constants.semanas}}\
                  semanas, rebirá $20.000. </br> Para un total de $40.979 </p>";
               break;
            }
            case 4: {
               document.getElementById("select-text").innerHTML =
-                "<p>Usted seleccionó la opción 4, hoy recibé $13.986 y en {{Constants.semanas}}\
+                "<p>Usted seleccionó la opción 4, hoy recibe $13.986 y en {{Constants.semanas}}\
                  semanas, rebirá $30.000. </br> Para un total de $43.986. </p>";
               break;
            }
            case 5: {
               document.getElementById("select-text").innerHTML =
-                "<p>Usted seleccionó la opción 5, hoy recibé $6.993 y en {{Constants.semanas}}\
+                "<p>Usted seleccionó la opción 5, hoy recibe $6.993 y en {{Constants.semanas}}\
                  semanas, rebirá $40.000. </br> Para un total de $46.993 </p>";
               break;
            }
            case 6: {
               document.getElementById("select-text").innerHTML =
-                "<p>Usted seleccionó la opción 6, hoy recibé $0 y en {{Constants.semanas}}\
+                "<p>Usted seleccionó la opción 6, hoy recibe $0 y en {{Constants.semanas}}\
                  semanas, rebirá $50.000. </br> Para un total de $50.000. </p>";
               break;
            }
@@ -81,51 +81,66 @@
         <tr>
             <td rowspan="6" class="col-sm-4 ancho"> <img src = "{% static 'CTB/17.PNG' %}" alt=""> </td>
             <td>
-                <button type="button" class="btn btn-outline-success" onclick="btn(1); clickaction(1)">
+                <button type="button" class="btn btn-outline-success" onclick="btn(1); clickaction(1)" data-toggle="modal" data-target="#staticBackdrop">
                     Opción 1
                 </button>
             </td>
         </tr>
         <tr>
             <td>
-                <button type="button" class="btn btn-outline-success" onclick="btn(2); clickaction(2)">
+                <button type="button" class="btn btn-outline-success" onclick="btn(2); clickaction(2)" data-toggle="modal" data-target="#staticBackdrop">
                     Opción 2
                 </button>
             </td>
         </tr>
         <tr>
             <td>
-                <button type="button" class="btn btn-outline-success" onclick="btn(3); clickaction(3)">
+                <button type="button" class="btn btn-outline-success" onclick="btn(3); clickaction(3)" data-toggle="modal" data-target="#staticBackdrop">
                     Opción 3
                 </button>
             </td>
         </tr>
         <tr>
             <td>
-                <button type="button" class="btn btn-outline-success" onclick="btn(4); clickaction(4)">
+                <button type="button" class="btn btn-outline-success" onclick="btn(4); clickaction(4)" data-toggle="modal" data-target="#staticBackdrop">
                     Opción 4
                 </button>
             </td>
         </tr>
         <tr>
-            <td> <button type="button" class="btn btn-outline-success" onclick="btn(5); clickaction(5)">
+            <td> <button type="button" class="btn btn-outline-success" onclick="btn(5); clickaction(5)" data-toggle="modal" data-target="#staticBackdrop">
                     Opción 5
                 </button>
             </td>
         </tr>
         <tr>
             <td>
-                <button type="button" class="btn btn-outline-success" onclick="btn(6); clickaction(6)">
+                <button type="button" class="btn btn-outline-success" onclick="btn(6); clickaction(6)" data-toggle="modal" data-target="#staticBackdrop">
                     Opción 6
                 </button>
             </td>
         </tr>
     </table>
 
-    <p class="opcion" id="select-text"> </p>
-
     <input type="hidden" name="rta_17" id="rta_17" />
 
-    <button class="btn btn-primary otree-btn" onclick="confirmar()"> Siguiente </button>
-
+    <div class="modal fade" id="staticBackdrop" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">¿Esta seguro que desea continuar?</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p class="opcion" id="select-text"> </p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal"> No </button>
+            <button class="btn btn-primary otree-btn"> Si </button>
+          </div>
+        </div>
+      </div>
+    </div>
 {% endblock %}

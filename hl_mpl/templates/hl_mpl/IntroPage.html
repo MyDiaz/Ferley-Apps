@@ -1,0 +1,45 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+
+{% block title %}
+    Instructions
+{% endblock %}
+
+
+{% block content %}
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <h1 class="display-4">A Simple Lottery</h1>
+
+            <p>In this experiment you will take part in a lottery with the chance to win a prize. You will be presented
+                with  "Choices".</p>
+
+            <p>For each Choice you will pick an Option, A or B, which will give you two possibilities for winning a
+                certain
+                amount of points. When you are done, the computer will at random pick one of the Choices. Then the
+                computer
+                will check which Option you chose and draw your payoff according to the probability distribution of your
+                picked Option in that Choice.
+            </p>
+            <p>
+                Before we start, please indicate your name, and tell us about your attitude towards risk.
+            </p>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-body">
+            <form>
+                <div class="row">
+                    <div class="col-auto">
+                        {% formfields %}
+                    </div>
+                </div>
+            </form>
+            {% next_button %}
+        </div>
+    </div>
+
+
+
+{% endblock %}

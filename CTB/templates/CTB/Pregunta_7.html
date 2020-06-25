@@ -126,6 +126,26 @@
 
     <input type="hidden" name="rta_7" id="rta_7" />
 
-    <button class="btn btn-primary otree-btn" onclick="confirmar()"> Siguiente </button>
+    <!--onclick="confirmar()"-->
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop"> Siguiente </button>
 
+    <div class="modal fade" id="staticBackdrop" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel"> Un segundo...</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+              ¿Esta seguro que desea continuar?
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal"> No </button>
+            <button class="btn btn-primary otree-btn"> Si </button>
+          </div>
+        </div>
+      </div>
+    </div>
 {% endblock %}

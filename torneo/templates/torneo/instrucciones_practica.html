@@ -1,0 +1,21 @@
+{% extends "global/Page.html" %} {% load otree static %} 
+
+{% block title %} Práctica {% endblock %} 
+
+
+{% block content %}
+
+<p>
+    Usted tendrá 90 segundos para probar la tarea que deberá realizar en las siguientes rondas. Trate de completar el mayor número de tareas posibles. Al finalizar esta etapa, la mitad de los participantes serán asignados al Contrato A y la otra mitad al
+    Contrato B.
+</p>
+
+    {% if meritocracia %}
+        <p> Para la asignación inicial, la mitad de participantes que completen el mayor número de tareas de codificación serán asignados al contrato A. </p>
+    {% else %}
+        <p> La asignación inicial será al azar, es decir, cada persona tendrá un 50% de probabilidad de recibir el Contrato A y un 50% de probabilidad de recibir el contrato B. </p>
+    {% endif %} 
+
+{% next_button %} 
+
+{% endblock %}

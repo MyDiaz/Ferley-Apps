@@ -1,0 +1,56 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Torneo
+{% endblock %}
+
+{% block content %}
+
+    <p> Esta etapa tendrá 5 rondas. En cada ronda usted hará parte de un grupo de cuatro (4) personas. Dos (2) tendrán un Contrato A y dos (2) un Contrato B. Los otros 3 miembros de su grupo irán cambiando ronda tras ronda.</p> 
+
+    <p> En cada ronda usted tendrá 90 segundos para realizar la tarea. El pago por cada tarea completada dependerá del contrato al que fue asignado en la ronda anterior:</p>
+    
+    <ul>
+        <li> Contrato A: recibe $ 2000 por tarea. </li>
+        <li> Contrato B: recibe $ 1000 por tarea. </li>
+    </ul>
+
+    <p> Al final de cada ronda se reasignarán los Contratos A y B según el número de tareas completadas respecto a los otros miembros del grupo. </p>
+
+    <b> Probabilidad de tener un Contrato A en la siguiente ronda: </b>
+    
+    <ul>
+        <li> Primer puesto de los jugadores con Contrato A: 100% </li> 
+        <li> Segundo puesto de los jugadores con Contrato A: 
+            {% if observabilidad %}
+                Depende de las tareas realizadas por el jugador en esta posición y en el primer puesto de los jugadores con Contrato B.
+            {% else }
+                50%
+            {% endif %}     
+        </li> 
+        <li> Primer puesto jugadores con Contrato B:
+            {% if observabilidad %}
+            Depende de las tareas realizadas por el jugador en esta posición y en el segundo puesto de los jugadores con Contrato A.
+            {% else }
+                50%
+            {% endif %}
+        </li> 
+        <li> Segundo puesto jugadores con Contrato B: 0% </li> 
+    </ul>
+
+    <p> En caso de empate en el número de tareas completas para dos participantes con el mismo contrato, las posiciones se definirán al azar. </p>
+    
+    <p> En otras palabras, la persona con más tareas completas de los dos que tienen el Contrato A va a mantener este contrato; y la persona con menos tareas completas de los dos que tienen el Contrato B va a mantener ese contrato. </p>
+
+    <p>
+        Para las otras dos personas, es posible que quién tiene el Contrato A sea reasignado a un Contrato B, y viceversa. 
+        {% if observabilidad %}
+            La probabilidad de ser reasignado dependerá del número de tareas realizadas, a mayor número de palabras codificadas mayor es la posibilidad de obtener el Contrato A para el próximo periodo.
+        {% else }    
+            La probabilidad de ser reasignado para ellos dos será del 50%.
+        {% endif %} 
+    </p>
+    {% next_button %}
+
+{% endblock %}

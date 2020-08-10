@@ -13,7 +13,7 @@ from django.conf import settings
 
 # Moved index function to separate file to keep this file cleaner
 from . import utils
-from hl_mpl.config import *
+#from hl_mpl.config import *
 
 import random
 import numpy as np
@@ -36,7 +36,7 @@ class Subsession(BaseSubsession):
         multiplier = self.session.config['multiplier']
 
         # Multiply payoffs by session.config.multiplier
-        payoffs = {key: [i * multiplier for i in value] for (key, value) in Constants.payoffs.items()}
+        payoffs = {key: [i * multiplier for i in value] for (key, value) in BaseConstants.payoffs.items()}
         # Store in session variables
         self.session.vars['payoffs'] = payoffs
 

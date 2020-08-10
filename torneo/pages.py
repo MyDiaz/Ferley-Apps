@@ -70,6 +70,7 @@ class resultados_torneo(Page):
             "palabras" : self.player.palabras,
             "pago_ronda": self.player.pago_ronda,
             "posicion_grupo": self.player.posicion_grupo,
+            "contrato_A": self.player.contrato_A
             "posicion_contrato": self.player.self.posicion_contrato,
             "probabilidad_contrato_A": self.player.probabilidad_contrato_A,
 

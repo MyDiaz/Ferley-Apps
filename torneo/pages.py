@@ -3,7 +3,7 @@ from ._builtin import Page, WaitPage
 from .models import Constants
 
 
-class presentacion(Page):
+class bienvenida(Page):
     timeout_seconds = 30
     def is_displayed(self):
         return self.round_number == 1
@@ -31,7 +31,7 @@ class tarea_practica(Page):
 class resultados_practica(Page):
     def vars_for_template(self):
         return {
-            "palabras" : self.player.get_palabras_azar(),
+            "palabras" : self.player.palabras,
         }
 
 class instrucciones_torneo(Page):
@@ -65,15 +65,15 @@ class gracias(Page):
         return self.round_number == self.session.config["Rounds"]
 
 page_sequence = [
-	presentacion, 
+	bienvenida, 
 	instrucciones_practica,
 	tarea_practica,
     resultados_practica,
     instrucciones_torneo,
 
-	calculos,
-	Asignacion,
-	espera_grupos,
+	# calculos,
+	# Asignacion,
+	# espera_grupos,
 
-	gracias
+	# gracias
 ]

@@ -16,7 +16,6 @@ class instrucciones_practica(Page):
     def vars_for_template(self):
         return {
             "meritocracia" : self.session.config["meritocracia"]
-            #observabilidad: self.session.config["observabilidad"]
         }
 
 class tarea_practica(Page):

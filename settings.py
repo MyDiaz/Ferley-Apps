@@ -16,9 +16,8 @@ else:
 SESSION_CONFIG_DEFAULTS = {
     'real_world_currency_per_point': 1.00,
     'participation_fee': 0.00,
-    'doc': "",
-    'observabilidad': False,
-}   'meritocracia': False
+    'doc': ""
+    }
 
 SESSION_CONFIGS = [
 dict(
@@ -58,12 +57,14 @@ dict(
         'display_name': 'otime',
         'num_demo_participants': 1,
         'app_sequence': ['otime']
-    }
+    },
     {
         'name': 'torneo',
         'display_name': 'Juego de encriptación',
-        'num_demo_participants': 1,
-        'app_sequence': ['otime']
+        'num_demo_participants': 4,
+        'app_sequence': ['torneo'],
+        'observabilidad': False,
+        'meritocracia': False
     }
 
 ]

@@ -11,39 +11,38 @@ class presentacion(Page):
 class instrucciones_practica(Page):
     timeout_seconds = 60
     def is_displayed(self):
-        return self.round_number == 2
+        return self.round_number == 1
     
     def vars_for_template(self):
         return {
-            meritocracia: self.session.config["meritocracia"] 
+            "meritocracia" : self.session.config["meritocracia"]
             #observabilidad: self.session.config["observabilidad"]
         }
 
 class tarea_practica(Page):
-    timeout_seconds = 60
-    self.player.set_palabras_azar()
-    def vars_for_template(self): 
+    timeout_seconds = 90
+    def is_displayed(self):
+        return self.round_number == 1
+    def vars_for_template(self):
+        self.player.set_palabras_azar()
         return {
-            palabras: self.player.get_palabras_azar()
+            "palabras" : self.player.palabras
+        }
+class resultados_practica(Page):
+    def vars_for_template(self):
+        return {
+            "palabras" : self.player.get_palabras_azar(),
         }
 
-class instrucciones_practica(Page):
-    self.player.set_palabras_azar()
+class instrucciones_torneo(Page):
     def vars_for_template(self): 
         return {
-            observabilidad: self.session.config["observabilidad"]
+            "observabilidad" : self.session.config["observabilidad"]
         }
     
 
 class ResultsWaitPage(WaitPage):
     pass
-
-
-class resultados_practica(Page):
-    def vars_for_template(self): 
-        return { 
-            palabras: self.player.get_palabras_azar(),
-        }
 
 class Asignacion(Page):
     pass
@@ -67,12 +66,14 @@ class gracias(Page):
 
 page_sequence = [
 	presentacion, 
-	Tarea, 
-	precalculos, 
-	Results,
+	instrucciones_practica,
+	tarea_practica,
+    resultados_practica,
+    instrucciones_torneo,
+
 	calculos,
 	Asignacion,
 	espera_grupos,
-	Ganancia, 
+
 	gracias
 ]

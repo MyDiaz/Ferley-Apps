@@ -18,7 +18,6 @@ function asignarContrato(c) {
 function calcular(signo, probA) {
   // 0: contrato A, 1:contrato B
   let contrato = Math.random()
-  console.log(contrato)
   var giro = 0
   if (contrato <= probA) {
     giro = 360 * 5

@@ -43,6 +43,10 @@ class asignacion_practica(Page):
     pass
 
 class instrucciones_torneo(Page):
+    timeout_seconds = 60
+    def is_displayed(self):
+        return self.round_number == 2
+
     def vars_for_template(self): 
         return {
             "observabilidad" : self.session.config["observabilidad"]
@@ -70,10 +74,9 @@ class resultados_torneo(Page):
             "palabras" : self.player.palabras,
             "pago_ronda": self.player.pago_ronda,
             "posicion_grupo": self.player.posicion_grupo,
-            "contrato_A": self.player.contrato_A
-            "posicion_contrato": self.player.self.posicion_contrato,
-            "probabilidad_contrato_A": self.player.probabilidad_contrato_A,
-
+            "contrato_A": self.player.contrato_A,
+            "posicion_contrato": self.player.posicion_contrato,
+            "probabilidad_contrato_A": self.player.probabilidad_contrato_A
         }
 
 
@@ -99,16 +102,15 @@ class gracias(Page):
         return self.round_number == self.session.config["Rounds"]
 
 page_sequence = [
-	bienvenida,
-    ruleta, 
+	bienvenida, 
 	instrucciones_practica,
 	tarea_practica,
     resultados_practica,
+    #ruleta,
     instrucciones_torneo,
-
-	# calculos,
-	# Asignacion,
-	# espera_grupos,
+    tarea_torneo,
+    resultados_torneo,
+    #ruleta,
 
 	# gracias
 ]

@@ -11,6 +11,7 @@ from otree.api import (
 from random import randint
 import numpy as np
 import random
+import json
 
 author = 'Ferley Rincón & Cesar Mantilla'
 
@@ -125,7 +126,7 @@ class Group(BaseGroup):
         rank = {}
         for j, k in jugadores:
             rank['j' + str(k)] = j.palabras
-        self.rank = self.sort(rank)
+        self.rank = json.dump(self.sort(rank))
 
     def set_ranking_contrato(self):
         rankA = {}
@@ -135,14 +136,8 @@ class Group(BaseGroup):
                 rankA['j' + str(k)] = j.palabras
             else:
                 rankB['j' + str(k)] = j.palabras
-        self.rankA = self.sort(rankA)
-        self.rankB = self.sort(rankB)
-
-    def get_ranking(self):
-        return self.rank
-
-    def get_ranking_contrato(self):
-        return self.rankA, self.rankB
+        self.rankA = json.dump(self.sort(rankA))
+        self.rankB = json.dump(self.sort(rankB))
 
 
 class Player(BasePlayer):

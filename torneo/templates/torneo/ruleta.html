@@ -1,0 +1,31 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+{% load static %}
+
+{% block title %}
+    Asignar contrato
+{% endblock %}
+
+{% block content %}
+  <div id="contrato">Contrato asignado: </div>
+    <div class="box-container">
+    <div class="triangle-bottom"></div>
+    <div id="ruleta" class="animation">
+      <div class="semi-circulo-s">
+        <span class="font">Contrato A</span>
+      </div>
+      <div class="semi-circulo-i">
+        <span class="font text-rotate">Contrato B</span>
+      </div>
+    </div>
+  </div>
+  {% next_button %}
+{% endblock %}
+
+{% block global_styles %}
+<link rel="stylesheet" href="{% static 'torneo/css/ruleta.css' %}"/>
+{% endblock %}
+
+{% block global_scripts %}
+<script src="{% static 'torneo/js/ruleta.js' %}"></script>
+{% endblock %}

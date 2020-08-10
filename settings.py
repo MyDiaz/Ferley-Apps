@@ -1,4 +1,5 @@
 from os import environ
+import os
 
 # if you set a property in SESSION_CONFIG_DEFAULTS, it will be inherited by all configs
 # in SESSION_CONFIGS, except those that explicitly override it.
@@ -97,3 +98,5 @@ NUM_WEEKS = 52
 
 #: The gain to be paid out per week
 GAIN_PER_WEEK = 20
+	
+STATIC_URL = '/static/'

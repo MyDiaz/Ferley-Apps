@@ -8,6 +8,11 @@ class bienvenida(Page):
     def is_displayed(self):
         return self.round_number == 1
 
+class ruleta(Page):
+    timeout_seconds = 12000
+    def is_displayed(self):
+        return self.round_number == 1
+
 class instrucciones_practica(Page):
     timeout_seconds = 60
     def is_displayed(self):
@@ -65,7 +70,8 @@ class gracias(Page):
         return self.round_number == self.session.config["Rounds"]
 
 page_sequence = [
-	bienvenida, 
+	bienvenida,
+    ruleta, 
 	instrucciones_practica,
 	tarea_practica,
     resultados_practica,

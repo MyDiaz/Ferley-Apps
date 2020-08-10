@@ -20,7 +20,7 @@ Informalidad Laboral: Movilidad y Observabilidad Laboral
 """
 
 class Constants(BaseConstants):
-    name_in_url = 'Torneo' #Comentario
+    name_in_url = 'Torneo'
     players_per_group = 4
     num_rounds = 6
     pago_A = c(2000)

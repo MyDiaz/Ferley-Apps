@@ -60,12 +60,10 @@ class tarea_torneo(Page):
         self.player.set_palabras_azar()
         return {
             "palabras" : self.player.palabras,
-            "pago_A": self.session.pago_A ,
-            "pago_B": self.session.pago_B,
+            "pago_A": Constants.pago_A ,
+            "pago_B": Constants.pago_B,
             "contrato_A": self.player.contrato_A
         }
-class ResultsWaitPage(WaitPage):
-    pass
 
 class resultados_torneo(Page):
     def vars_for_template(self):

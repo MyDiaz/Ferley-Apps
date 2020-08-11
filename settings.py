@@ -20,15 +20,17 @@ SESSION_CONFIG_DEFAULTS = {
     'doc': ""
     }
 
-SESSION_CONFIGS = [
-dict(
+"""dict(
         name='hl_mpl',
         display_name='Risk Lottery',
         num_demo_participants=10,
         app_sequence=['hl_mpl'],
         num_choices=8,
         multiplier=10,
-    ),
+    ),"""
+
+SESSION_CONFIGS = [
+
     {
         'name':'CTB',
         'display_name': 'encuesta',

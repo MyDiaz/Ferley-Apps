@@ -10,13 +10,13 @@
     <p> Su posición en el ranking grupal es {{posicion_grupo}} de 4. </p>
 
     {% if contrato_A %}
-    	{% if posicion_contrato === 1 %}
+    	{% if posicion_contrato == 1 %}
         <p> Usted fue quien más tareas realizó entre las personas con Contrato A de su grupo. </p>
         {% else %}
         <p> Usted fue quien menos tareas realizó entre las personas con Contrato A de su grupo. </p>
         {% endif %} 
     {% else %}
-        {% if posicion_contrato === 1 %}
+        {% if posicion_contrato == 1 %}
         <p> Usted fue quien más tareas realizó entre las personas con Contrato B de su grupo. </p>
         {% else %}
         <p> Usted fue quien menos tareas realizó entre las personas con Contrato B de su grupo. </p>

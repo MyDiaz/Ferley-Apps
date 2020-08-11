@@ -2,11 +2,17 @@
 {% load otree static %}
 
 {% block title %}
+
 {% endblock %}
 
 {% block content %}
 
-    Recuerde que el tipo de contrato que usted tiene es: {{ }}
+    Usted tiene el Contrato: 
+    	{% if contrato_A %}
+        A. Cada tarea completa le pagará {{pago_A}}
+        {% else %}
+        B. Cada tarea completa le pagará {{pago_b}}
+        {% endif %} 
 
     {% next_button %}
 

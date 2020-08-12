@@ -151,7 +151,7 @@ class Player(BasePlayer):
     pago = models.CurrencyField()
     pago_ronda = models.CurrencyField()
 
-    def pagar_jugador(self):
+    def set_pagar_jugador(self):
         jugadores = self.get.players()
         ronda = self.subsession.get_ronda_pagar()
         for j in jugadores:

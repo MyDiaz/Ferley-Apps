@@ -4,14 +4,10 @@ from .models import Constants
 
 
 class bienvenida(Page):
-    timeout_seconds = 30
+    timeout_seconds = 60
     def is_displayed(self):
         return self.round_number == 1
 
-class ruleta(Page):
-    timeout_seconds = 12000
-    def is_displayed(self):
-        return self.round_number == 1
 
 class instrucciones_practica(Page):
     timeout_seconds = 60
@@ -22,25 +18,6 @@ class instrucciones_practica(Page):
         return {
             "meritocracia" : self.session.config["meritocracia"]
         }
-        
-class tarea_practica(Page):
-    timeout_seconds = 90
-    def is_displayed(self):
-        return self.round_number == 1
-    def vars_for_template(self):
-        self.player.set_palabras_azar()
-        return {
-            "palabras" : self.player.palabras
-        }
-
-class resultados_practica(Page):
-    def vars_for_template(self):
-        return {
-            "palabras" : self.player.palabras,
-        }
-
-class asignacion_practica(Page):
-    pass
 
 class instrucciones_torneo(Page):
     timeout_seconds = 60
@@ -51,7 +28,17 @@ class instrucciones_torneo(Page):
         return {
             "observabilidad" : self.session.config["observabilidad"]
         }
-    
+            
+class tarea_practica(Page):
+    timeout_seconds = 90
+    def is_displayed(self):
+        return self.round_number == 1
+    def vars_for_template(self):
+        self.player.set_palabras_azar()
+        return {
+            "palabras" : self.player.palabras
+        }
+
 class tarea_torneo(Page):
     timeout_seconds = 90
     def is_displayed(self):
@@ -65,7 +52,17 @@ class tarea_torneo(Page):
             "contrato_A": self.player.contrato_A
         }
 
+class resultados_practica(Page):
+    def is_displayed(self):
+        return self.round_number == 1
+    def vars_for_template(self):
+        return {
+            "palabras" : self.player.palabras,
+        }
+
 class resultados_torneo(Page):
+    def is_displayed(self):
+        return self.round_number > 1
     def vars_for_template(self):
         return {
             "ronda": self.round_number - 1, #Restar 1 al número de rondas. Ronda 0 = Práctica
@@ -77,38 +74,50 @@ class resultados_torneo(Page):
             "probabilidad_contrato_A": self.player.probabilidad_contrato_A
         }
 
-
-
-class asignacion_torneo(Page):
-    pass
+class asignacion(Page):
+    def vars_for_template(self): 
+        return {
+            "ronda": self.round_number - 1,
+            "contrato_A_torneo" : self.player.contrato_A_torneo,
+            #"palabras" : 
+            #"contrato_A" : 
+        }
 
 class espera_grupos(WaitPage):
+    def is_displayed(self):
+        return self.round_number > 1
     wait_for_all_groups = True
-
-
-class precalculos(WaitPage):
-	pass
-
-class calculos(WaitPage):
-	pass
 		
-class GananciaTotal(Page):
-	pass
-
+class pago_total(Page):
+    def is_displayed(self):
+        return self.round_number == Constants.num_rounds
+    def vars_for_template(self): 
+        return {
+            "ronda_pagar" :  Constants.ronda_pagar - 1,
+            "pago_total" : 'set_pagar_jugador',
+            #"palabras" : 
+            #"contrato_A" : 
+        }
+    
 class gracias(Page):
     def is_displayed(self):
-        return self.round_number == self.session.config["Rounds"]
+        return self.round_number == Constants.num_rounds
+
+class ruleta(Page):
+    timeout_seconds = 12000
+    def is_displayed(self):
+        return self.round_number == 1
 
 page_sequence = [
 	bienvenida, 
 	instrucciones_practica,
 	tarea_practica,
-    resultados_practica,
-    #ruleta,
+    resultados_practica, 
+    espera_grupos,
     instrucciones_torneo,
     tarea_torneo,
     resultados_torneo,
-    #ruleta,
-
-	# gracias
+    asignacion,
+	pago_total
+    gracias
 ]

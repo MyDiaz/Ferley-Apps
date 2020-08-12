@@ -1,2 +1,18 @@
-asignacion_torneo
+{% extends "global/Page.html" %}
+{% load otree static %}
 
+{% block title %}
+    Contrato Ronda {{ronda}}  
+{% endblock %}
+
+{% block content %}
+	<p> En la siguiente ronda usted tendrá un Contrato
+	{% if contrato_A_torneo %}
+        A
+    {% else %}
+        B
+    {% endif %} 
+    </p>
+    {% next_button %}
+
+{% endblock %}

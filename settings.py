@@ -67,11 +67,10 @@ SESSION_CONFIGS = [
         'num_demo_participants': 4,
         'app_sequence': ['torneo'],
         'observabilidad': False,
-        'meritocracia': False
+        'meritocracia': False,
     }
 
 ]
-
 
 # ISO-639 code
 # for example: de, fr, ja, ko, zh-hans

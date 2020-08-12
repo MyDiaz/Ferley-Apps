@@ -77,13 +77,14 @@ class resultados_torneo(Page):
 class asignacion(Page):
     def vars_for_template(self): 
         return {
-            "ronda": self.round_number - 1,
+            "ronda": self.round_number,
             "contrato_A_torneo" : self.player.contrato_A_torneo,
             #"palabras" : 
             #"contrato_A" : 
         }
 
 class espera_grupos(WaitPage):
+    contrato_A = contrato_A_torneo
     def is_displayed(self):
         return self.round_number > 1
     wait_for_all_groups = True
@@ -118,6 +119,6 @@ page_sequence = [
     tarea_torneo,
     resultados_torneo,
     asignacion,
-	pago_total
-    gracias
+	pago_total,
+    gracias,
 ]

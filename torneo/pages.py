@@ -2,7 +2,6 @@ from otree.api import Currency as c, currency_range
 from ._builtin import Page, WaitPage
 from .models import Constants
 
-
 class bienvenida(Page):
     timeout_seconds = 60
     def is_displayed(self):
@@ -62,6 +61,7 @@ class resultados_practica(Page):
 
 class calculos(WaitPage):
     def after_all_players_arrive(self):
+        self.subsession.set_ranking()
         self.group.set_ranking()
 
 class resultados_torneo(Page):
@@ -89,9 +89,9 @@ class asignacion(Page):
 
 class espera_grupos(WaitPage):
     wait_for_all_groups = True
-
+    after_all_players_arrive = 'creating_groups'
     def is_displayed(self):
-        return self.round_number > 1
+        return self.round_number < 6
     
 		
 class pago_total(Page):
@@ -117,14 +117,14 @@ class ruleta(Page):
 page_sequence = [
 	bienvenida, 
 	instrucciones_practica,
-	tarea_practica,
-    resultados_practica, 
-    espera_grupos,
     instrucciones_torneo,
+	tarea_practica,
     tarea_torneo,
     calculos,
+    resultados_practica,
     resultados_torneo,
     asignacion,
+    espera_grupos,
 	pago_total,
     gracias,
 ]

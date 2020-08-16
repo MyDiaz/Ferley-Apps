@@ -22,7 +22,7 @@ Informalidad Laboral: Movilidad y Observabilidad Laboral
 class Constants(BaseConstants):
     name_in_url = 'Torneo'
     players_per_group = 4
-    num_rounds = 4
+    num_rounds = 6
     pago_A = c(2000)
     pago_B = c(1000)
     ronda_pagar = randint(2, num_rounds+1)

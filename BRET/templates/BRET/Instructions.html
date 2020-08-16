@@ -1,0 +1,67 @@
+{% extends "global/Base.html" %}
+{% load staticfiles otree %}
+{% load i18n %}
+
+
+{# ****************************************************************************************************************** #}
+{# *** STYLES *** #}
+{# ****************************************************************************************************************** #}
+{% block styles %}
+    <link href="{% static 'bret/css/custom.css' %}" rel="stylesheet"/>
+{% endblock %}
+
+
+{# ****************************************************************************************************************** #}
+{# *** TITLE *** #}
+{# ****************************************************************************************************************** #}
+{% block title %}
+    {% trans "INSTRUCCIONES" %}
+{% endblock %}
+
+
+{# ****************************************************************************************************************** #}
+{# *** CONTENT *** #}
+{# ****************************************************************************************************************** #}
+{% block content %}
+
+    <div class="instrucions">
+        <p>
+            {% blocktrans trimmed %}
+                A continuación, usted vera en la pantalla una matriz de {{ num_rows }}x{{ num_cols }} que contiene
+                {{ num_boxes }} cajas.
+            {% endblocktrans %}
+        </p>
+        <p>
+            {% blocktrans trimmed %}
+                Tan pronto como usted inicíe la tarea al clicker en| 'Inicio',
+                una de las cajas será recolectada cada segundo, iniciando por la parte superior izquierda.
+                Una vez la caja es recolectada será  marcada con un simbolo de chulo.
+                Por cada caja usted gana {{ box_value }}.
+            {% endblocktrans %}
+        </p>
+        <p>
+            {% blocktrans trimmed %}
+                Detrás de una de las cajas se esconde una bomba que destruye todo lo que ha sido recogido.
+                Las cajas faltantes {{ num_nobomb }} valen {{ box_value }} cada una.
+                Usted no sabes donde esta  localizada la bomba.
+                Usted solo sabes que la bomba puede estar en cualquier caja con la misma  probabilidad.
+            {% endblocktrans %}
+        </p>
+        <p>
+            {% blocktrans trimmed %}
+                Su tarea es elegir cuando parar el proceso de recolección.  haciendo clickeando el boton 'Stop' en cualquier momento.
+                Si usted elige la caja donde  esta localizada la bomba, la bomba explotará y usted no tendrá  ganacias.
+                Si usted para antes de eligir la bomba, usted gana la cantidad de dinero acumulada hasta ese momento.
+            {% endblocktrans %}
+        </p>
+        <p>
+            {% blocktrans trimmed %}
+                Al final de la tarea haga click en el boton 'Solve' para ver los resultados .
+                Un signo de peso  o un simbolo de fuego (para la bomba) será mostrado en cada caja que haya recogido.
+            {% endblocktrans %}
+        </p>
+
+    </div>
+
+     {% next_button %}
+{% endblock %}

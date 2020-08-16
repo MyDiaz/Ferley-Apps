@@ -84,10 +84,11 @@ class asignacion(Page):
         }
 
 class espera_grupos(WaitPage):
-    contrato_A = contrato_A_torneo
+    wait_for_all_groups = True
+
     def is_displayed(self):
         return self.round_number > 1
-    wait_for_all_groups = True
+    
 		
 class pago_total(Page):
     def is_displayed(self):

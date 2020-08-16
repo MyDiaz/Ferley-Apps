@@ -7,11 +7,11 @@
 
 {% block content %}
 
-    Usted tiene el Contrato: 
+    Usted tiene un Contrato  
     	{% if contrato_A %}
-        A. Cada tarea completa le pagará {{pago_A}}
+        A, por cada tarea completa recibirá {{pago_A}}.
         {% else %}
-        B. Cada tarea completa le pagará {{pago_B}}
+        B, por cada tarea completa recibirá {{pago_B}}.
         {% endif %} 
 
     {% next_button %}

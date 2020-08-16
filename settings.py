@@ -62,6 +62,12 @@ SESSION_CONFIGS = [
         'app_sequence': ['otime']
     },
     {
+        'name': 'BRET',
+        'display_name': 'BRET',
+        'num_demo_participants': 1,
+        'app_sequence': ['BRET']
+    },
+    {
         'name': 'torneo',
         'display_name': 'Juego de encriptación',
         'num_demo_participants': 4,

@@ -46,50 +46,58 @@ class Subsession(BaseSubsession):
 
     def creating_groups(self):
         # Creando el grupo aleatoriamente (debe ser estratificado!!!)
-        if self.round_number > 1:
-            players = self.get_players() #devuelve un array de objeto jugador
-            a1 = [], a2 = [], b1 = [], b2 = []
-            for i in players:
-                if i.contrato_A_torneo:
-                    a1.append(i) if i.posicion_contrato_torneo == 1 else a2.append(i)
+        players = self.get_players() #devuelve un array de objeto jugador
+        num_groups = len(self.get_groups())
+        a1, a2, b1, b2 = [], [], [], []
+        for i in players:
+            if i.contrato_A_torneo:
+                if i.posicion_contrato_torneo == 1:
+                    a1.append(i)  
                 else:
-                    b1.append(i) if i.posicion_contrato_torneo == 1 else b2.append(i)
+                    a2.append(i)
+            else:
+                if i.posicion_contrato_torneo == 1:
+                    b1.append(i)  
+                else:
+                    b2.append(i)
 
-            matrix = np.c_[a1, a2, b1, b2]
-            for i in range(4):
-                x = np.random.choice(4, 4, replace=False)
-                matrix[:, i] = matrix[x, i]
-
-            self.set_group_matrix(matrix)
-        else:
-            self.group_randomly()
+        matrix = np.c_[a1, a2, b1, b2]
+        for i in range(Constants.players_per_group):
+            x = np.random.choice(num_groups, num_groups, replace=False)
+            matrix[:, i] = matrix[x, i]
+        self.in_round(self.round_number+1).set_group_matrix(matrix)
 
     """Este método retorna la posición del jugador en el ranking grupal"""
     def set_ranking(self):
         jugadores = self.get_players()
         rank = {}
-        for j, k in jugadores:
+        for k, j in enumerate(jugadores):
             rank['j' + str(k)] = j.palabras
-        if self.meritocracia:
+        if self.meritocracia or self.observabilidad:
             rank = self.group.sort(rank)
         else:
             l = list(rank.items())
             random.shuffle(l)
             rank = dict(l)
-        for i, j in rank.keys():
-            jugador = self.get_player_by_id(int(i.split('j')[1]))
-            if j < 8:
+        for j, i in enumerate(rank.keys()):
+            jugador = jugadores[int(i.split('j')[1])]
+            # Primera mitad de los jugadores es contrato A
+            if j < len(jugadores)//2:
                 jugador.contrato_A_torneo = True
+                # Primeta mitad de la mitad (primer cuarto) son posicion 1 contrato A
+                if j < len(jugadores)//4:
+                    jugador.posicion_contrato_torneo = 1
+                # La otra mitad seria posicion 2 contrato A
+                else:
+                    jugador.posicion_contrato_torneo = 2
+            # La otra mitad son contato B
             else:
                 jugador.contrato_A_torneo = False
-            if j < 4:
-                jugador.posicion_contrato_torneo = 1
-            else:
-                jugador.posicion_contrato_torneo = 2
-            if j >= 8 & j < 12:
-                jugador.posicion_contrato_torneo = 1
-            else:
-                jugador.posicion_contrato_torneo = 2
+                # La primera mitad de la mitad de B (osea 3/4) son posicion 1
+                if j < 3*len(jugadores)//4:
+                    jugador.posicion_contrato_torneo = 1
+                else:
+                    jugador.posicion_contrato_torneo = 2
 
 
 class Group(BaseGroup):
@@ -117,6 +125,7 @@ class Group(BaseGroup):
     def sort(self, rank):
         l = list(rank.items())
         random.shuffle(l)
+        rank = dict(l)
         rank = dict(sorted(rank.items(), key=lambda x: x[1], reverse=True))
         return rank
 
@@ -124,7 +133,7 @@ class Group(BaseGroup):
         jugadores = self.get_players() # [<P1>,<P2>,]
         rank = {}
         for k,j in enumerate(jugadores):
-            rank['j' + str(k)] = j.palabras
+            rank['j' + str(k+1)] = j.palabras
         self.rank = json.dumps(self.sort(rank))
         # '{'j1':7, 'j2':5 }'
 
@@ -136,8 +145,8 @@ class Group(BaseGroup):
                 rankA['j' + str(k)] = j.palabras
             else:
                 rankB['j' + str(k)] = j.palabras
-        self.rankA = json.dump(self.sort(rankA))
-        self.rankB = json.dump(self.sort(rankB))
+        self.rankA = json.dumps(self.sort(rankA))
+        self.rankB = json.dumps(self.sort(rankB))
 
 
 class Player(BasePlayer):
@@ -160,7 +169,7 @@ class Player(BasePlayer):
 
     def set_probabilidad_contrato_A(self):
         if self.subsession.observabilidad == True:
-            self.probabilidad_contrato_A = self.palabras / Group.get_palabras_torneo()
+            self.probabilidad_contrato_A = self.palabras / self.group.get_palabras_torneo()
         else:
             self.probabilidad_contrato_A = 0.5
 

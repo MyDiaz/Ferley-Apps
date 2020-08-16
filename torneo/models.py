@@ -114,19 +114,19 @@ class Group(BaseGroup):
         self.ganador_contrato_A = random.choices([rankA.keys()[1].split('j')[1], rankB.keys()[0].split('j')[1]],
                                                  weights=(p2.probabilidad_contrato_A, p3.probabilidad_contrato_A))
 
-    def sort(rank):
+    def sort(self, rank):
         l = list(rank.items())
         random.shuffle(l)
-        rank = dict(l)
         rank = dict(sorted(rank.items(), key=lambda x: x[1], reverse=True))
         return rank
 
     def set_ranking(self):
-        jugadores = self.get.players()
+        jugadores = self.get_players() # [<P1>,<P2>,]
         rank = {}
-        for j, k in jugadores:
+        for k,j in enumerate(jugadores):
             rank['j' + str(k)] = j.palabras
-        self.rank = json.dump(self.sort(rank))
+        self.rank = json.dumps(self.sort(rank))
+        # '{'j1':7, 'j2':5 }'
 
     def set_ranking_contrato(self):
         rankA = {}
@@ -151,6 +151,7 @@ class Player(BasePlayer):
     pago = models.CurrencyField()
     pago_ronda = models.CurrencyField()
 
+    #Esta función define el pago final
     def set_pagar_jugador(self):
         jugadores = self.get.players()
         ronda = self.subsession.get_ronda_pagar()
@@ -164,18 +165,18 @@ class Player(BasePlayer):
             self.probabilidad_contrato_A = 0.5
 
     def set_posicion_grupo(self):
-        rank = self.group.get_ranking()
-        self.posicion_grupo = list(rank).index('j' + str(self.id_in_group)) + 1
+        rank = json.loads(self.group.rank)
+        self.posicion_grupo = list(rank.keys()).index('j' + str(self.id_in_group)) + 1
 
     def set_posicion_contrato(self):
-        rankA, rankB = self.group.get_ranking_contrato()
+        rankA, rankB = self.group.set_ranking_contrato()
         if self.contrato_A:
             self.posicion_contrato = list(rankA).index('j' + str(self.id_in_group)) + 1
         else:
             self.posicion_contrato = list(rankB).index('j' + str(self.id_in_group)) + 1
 
     def set_contrato_A_torneo(self):
-        ganador = self.group.get_ganador_contrato_A()
+        ganador = self.group.set_ganador_contrato_A()
         if (self.contrato_A == True and self.posicion_contrato == 1) or (self.contrato_A == False and self.posicion_contrato == 2):
             self.contrato_A_torneo = self.contrato_A
             if self.posicion_contrato == 1:

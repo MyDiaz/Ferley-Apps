@@ -52,14 +52,15 @@ class Subsession(BaseSubsession):
         for i in players:
             if i.contrato_A_torneo:
                 if i.posicion_contrato_torneo == 1:
-                    a1.append(i)  
+                    a1.append(i.in_round(self.round_number+1))  
                 else:
-                    a2.append(i)
+                    a2.append(i.in_round(self.round_number+1))
             else:
                 if i.posicion_contrato_torneo == 1:
-                    b1.append(i)  
+                    b1.append(i.in_round(self.round_number+1))  
                 else:
-                    b2.append(i)
+                    b2.append(i.in_round(self.round_number+1))
+            i.in_round(self.round_number+1).contrato_A = i.contrato_A_torneo
 
         matrix = np.c_[a1, a2, b1, b2]
         for i in range(Constants.players_per_group):
@@ -67,14 +68,22 @@ class Subsession(BaseSubsession):
             matrix[:, i] = matrix[x, i]
         self.in_round(self.round_number+1).set_group_matrix(matrix)
 
+    def sort(self, rank):
+        l = list(rank.items())
+        random.shuffle(l)
+        rank = dict(l)
+        rank = dict(sorted(rank.items(), key=lambda x: x[1], reverse=True))
+        return rank
+
     """Este método retorna la posición del jugador en el ranking grupal"""
     def set_ranking(self):
         jugadores = self.get_players()
         rank = {}
         for k, j in enumerate(jugadores):
             rank['j' + str(k)] = j.palabras
-        if self.meritocracia or self.observabilidad:
-            rank = self.group.sort(rank)
+        if (self.meritocracia and self.round_number==1) or (self.observabilidad and 
+            self.round_number!=1):
+            rank = self.sort(rank)
         else:
             l = list(rank.items())
             random.shuffle(l)
@@ -98,7 +107,20 @@ class Subsession(BaseSubsession):
                     jugador.posicion_contrato_torneo = 1
                 else:
                     jugador.posicion_contrato_torneo = 2
-
+            if(self.round_number==1):
+                jugador.contrato_A = jugador.contrato_A_torneo
+    
+    def set_ranking_grupos(self):
+        for g in self.get_groups():
+            g.set_ranking()
+            g.set_ranking_contrato()
+    
+    def set_posiciones_jugadores(self):
+        for j in self.get_players():
+            j.set_pago_ronda()
+            j.set_posicion_grupo()
+            j.set_posicion_contrato(),
+            j.set_probabilidad_contrato_A()
 
 class Group(BaseGroup):
     #solo deben declararse variables por medio de models.
@@ -109,9 +131,10 @@ class Group(BaseGroup):
     ganador_contrato_A = models.IntegerField(initial=0)
 
     def get_palabras_torneo(self):
-        rankA, rankB = self.get_ranking_group()
-        p2 = rankA[1]  # palabras del jugador en la posicion 2 del ranking A
-        p3 = rankB[0]  # palabras del jugador en la posicion 1 del ranking B
+        rankA = json.loads(self.rankA)
+        rankB = json.loads(self.rankB) 
+        p2 = list(rankA.values())[1]  # palabras del jugador en la posicion 2 del ranking A
+        p3 = list(rankB.values())[0]  # palabras del jugador en la posicion 1 del ranking B
         palabras_torneo = p2 + p3
         return palabras_torneo
 
@@ -140,14 +163,13 @@ class Group(BaseGroup):
     def set_ranking_contrato(self):
         rankA = {}
         rankB = {}
-        for j, k in self.get_players():
-            if j.Contrato_A:
-                rankA['j' + str(k)] = j.palabras
+        for k,j in enumerate(self.get_players()):
+            if j.contrato_A:
+                rankA['j' + str(k+1)] = j.palabras
             else:
-                rankB['j' + str(k)] = j.palabras
+                rankB['j' + str(k+1)] = j.palabras
         self.rankA = json.dumps(self.sort(rankA))
         self.rankB = json.dumps(self.sort(rankB))
-
 
 class Player(BasePlayer):
     contrato_A = models.BooleanField()
@@ -178,7 +200,8 @@ class Player(BasePlayer):
         self.posicion_grupo = list(rank.keys()).index('j' + str(self.id_in_group)) + 1
 
     def set_posicion_contrato(self):
-        rankA, rankB = self.group.set_ranking_contrato()
+        rankA = json.loads(self.group.rankA)
+        rankB = json.loads(self.group.rankB)
         if self.contrato_A:
             self.posicion_contrato = list(rankA).index('j' + str(self.id_in_group)) + 1
         else:
@@ -209,6 +232,3 @@ class Player(BasePlayer):
         else:
             self.pago_ronda = Constants.pago_B * self.palabras
         # cantidad de dinero que recibiría el jugador si la ronda actual es elegida para ser pagada
-
-    # Payoff=pago_ronda
-

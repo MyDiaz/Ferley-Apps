@@ -51,6 +51,13 @@ class tarea_torneo(Page):
             "contrato_A": self.player.contrato_A
         }
 
+class calculos(WaitPage):
+    wait_for_all_groups = True
+    def after_all_players_arrive(self):
+        self.subsession.set_ranking()
+        self.subsession.set_ranking_grupos()
+        self.subsession.set_posiciones_jugadores()
+
 class resultados_practica(Page):
     def is_displayed(self):
         return self.round_number == 1
@@ -59,11 +66,6 @@ class resultados_practica(Page):
             "palabras" : self.player.palabras,
         }
 
-class calculos(WaitPage):
-    def after_all_players_arrive(self):
-        self.subsession.set_ranking()
-        self.group.set_ranking()
-
 class resultados_torneo(Page):
     def is_displayed(self):
         return self.round_number > 1
@@ -71,11 +73,11 @@ class resultados_torneo(Page):
         return {
             "ronda": self.round_number - 1, #Restar 1 al número de rondas. Ronda 0 = Práctica
             "palabras" : self.player.palabras,
-            "pago_ronda": self.player.set_pago_ronda(),
-            "posicion_grupo": self.player.set_posicion_grupo(),
+            "pago_ronda": self.player.pago_ronda,
+            "posicion_grupo": self.player.posicion_grupo,
             "contrato_A": self.player.contrato_A,
             "posicion_contrato": self.player.posicion_contrato,
-            "probabilidad_contrato_A": self.player.set_probabilidad_contrato_A()
+            "probabilidad_contrato_A": "{0:.2f}".format(self.player.probabilidad_contrato_A)
         }
 
 class asignacion(Page):

@@ -7,12 +7,14 @@
 
 {% block content %}
 
-    Usted tiene un Contrato  
+    <p>Usted tiene un Contrato  
     	{% if contrato_A %}
         A, por cada tarea completa recibirá {{pago_A}}.
         {% else %}
         B, por cada tarea completa recibirá {{pago_B}}.
-        {% endif %} 
+        {% endif %} </p>
+        
+    <p> El numero de tareas realizadas correctamente es: {{palabras}} </p>
 
     {% next_button %}
 

@@ -1,5 +1,11 @@
-{% extends "global/Page.html" %} {% load staticfiles otree %} {% load otree static %} {% block title %} Pregunta #14 {% endblock %} {% block content %}
+{% extends "global/Page.html" %}
+{% load staticfiles otree %}
+{% load otree static %}
+{% block title %}
+Pregunta #14
+{% endblock %}
 
+{% block content %}
 <style>
     .otree-title {
         font-size: 50px;
@@ -29,7 +35,7 @@
                 {
                     document.getElementById("select-text").innerHTML =
                     "<p> Ha seleccionado la opción 1. Es decir, si esta pregunta es seleccionada para el pago, usted recibe: <br> <br>\
-                Hoy $45.000 y en {{Constants.semanas}} semanas $0. Total $45.000 <br> <br>\
+                Recibe en {{Constants.semanas}} semanas $45.000 y además dentro de 10 semanas $0. Total $45.000 <br> <br>\
                 ¿Está seguro de su elección? </p>";
                     break;
                 }
@@ -37,7 +43,7 @@
                 {
                     document.getElementById("select-text").innerHTML =
                     "<p> Ha seleccionado la opción 2. Es decir, si esta pregunta es seleccionada para el pago, usted recibe: <br> <br>\
-                Hoy $36.000 y en {{Constants.semanas}} semanas $10.000. Total $46.000 <br> <br>\
+                Recibe en {{Constants.semanas}} semanas $36.000 y además dentro de 10 semanas $10.000. Total $46.000 <br> <br>\
                 ¿Está seguro de su elección? </p>";
                     break;
                 }
@@ -45,7 +51,7 @@
                 {
                     document.getElementById("select-text").innerHTML =
                     "<p> Ha seleccionado la opción 3. Es decir, si esta pregunta es seleccionada para el pago, usted recibe: <br> <br>\
-                Hoy $27.000 y en {{Constants.semanas}} semanas $20.000. Total $47.000 <br> <br>\
+                Recibe en {{Constants.semanas}} semanas $27.000 y además dentro de 10 semanas $20.000. Total $47.000 <br> <br>\
                 ¿Está seguro de su elección? </p>";
                     break;
                 }
@@ -53,7 +59,7 @@
                 {
                     document.getElementById("select-text").innerHTML =
                     "<p> Ha seleccionado la opción 4. Es decir, si esta pregunta es seleccionada para el pago, usted recibe: <br> <br>\
-                Hoy $18.000 y en {{Constants.semanas}} semanas $30.000. Total $38.000 <br> <br>\
+                Recibe en {{Constants.semanas}} semanas $18.000 y además dentro de 10 semanas $30.000. Total $38.000 <br> <br>\
                 ¿Está seguro de su elección? </p>";
                     break;
                 }
@@ -61,7 +67,7 @@
                 {
                     document.getElementById("select-text").innerHTML =
                     "<p> Ha seleccionado la opción 5. Es decir, si esta pregunta es seleccionada para el pago, usted recibe: <br> <br>\
-                Hoy $9.000 y en {{Constants.semanas}} semanas $40.000. Total $49.000 <br> <br>\
+                Recibe en {{Constants.semanas}} semanas $9.000 y además dentro de 10 semanas $40.000. Total $49.000 <br> <br>\
                 ¿Está seguro de su elección? </p>";
                     break;
                 }
@@ -69,7 +75,7 @@
                 {
                     document.getElementById("select-text").innerHTML =
                     "<p> Ha seleccionado la opción 6. Es decir, si esta pregunta es seleccionada para el pago, usted recibe: <br> <br>\
-                Hoy $0 y en {{Constants.semanas}} semanas $50.000. Total $50.000 <br> <br>\
+                Recibe en {{Constants.semanas}} semanas $0 y además dentro de 10 semanas $50.000. Total $50.000 <br> <br>\
                 ¿Está seguro de su elección? </p>";
                     break;
                 }

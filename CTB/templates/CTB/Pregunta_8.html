@@ -38,38 +38,44 @@
         switch(b){
            case 1: {
               document.getElementById("select-text").innerHTML =
-                "<p> Usted seleccionó la opción 1, hoy recibé $47.619 y en {{Constants.semanas}}\
-                 semanas, rebirá $0. </br> Para un total de $47.619. </p>";
+                "<p> Ha seleccionado la opción 1. Es decir, si esta pregunta es seleccionada para el pago, usted recibe: <br> <br>\
+                Hoy $40.000 y en 10 semanas $0. Total $40.000 <br> <br>\
+                ¿Está seguro de su elección? </p>";
               break;
            }
            case 2: {
               document.getElementById("select-text").innerHTML =
-                "<p> Usted seleccionó la opción 2, hoy recibé $38.095 y en {{Constants.semanas}}\
-                 semanas, rebirá $10.000. </br> Para un total de $48.095. </p>";
+                "<p> Ha seleccionado la opción 2. Es decir, si esta pregunta es seleccionada para el pago, usted recibe: <br> <br>\
+                Hoy $32.000 y en 10 semanas $10.000. Total $42.000 <br> <br>\
+                ¿Está seguro de su elección? </p>";
               break;
            }
            case 3:  {
               document.getElementById("select-text").innerHTML =
-                "<p> Usted seleccionó la opción 3, hoy recibé $28.571 y en {{Constants.semanas}}\
-                 semanas, rebirá $20.000. </br> Para un total de $48.571. </p>";
+                "<p> Ha seleccionado la opción 1. Es decir, si esta pregunta es seleccionada para el pago, usted recibe: <br> <br>\
+                Hoy $24.000 y en 10 semanas $20.000. Total $44.000 <br> <br>\
+                ¿Está seguro de su elección? </p>";
               break;
            }
            case 4: {
               document.getElementById("select-text").innerHTML =
-                "<p>Usted seleccionó la opción 4, hoy recibé $19.048 y en {{Constants.semanas}}\
-                 semanas, rebirá $30.000. </br> Para un total de $49.048. </p>";
+                "<p> Ha seleccionado la opción 1. Es decir, si esta pregunta es seleccionada para el pago, usted recibe: <br> <br>\
+                Hoy $16.000 y en 10 semanas $30.000. Total $46.000 <br> <br>\
+                ¿Está seguro de su elección? </p>";
               break;
            }
            case 5: {
               document.getElementById("select-text").innerHTML =
-                "<p>Usted seleccionó la opción 5, hoy recibé $9.524 y en {{Constants.semanas}}\
-                 semanas, rebirá $40.000. </br> Para un total de $49.524. </p>";
+                "<p> Ha seleccionado la opción 1. Es decir, si esta pregunta es seleccionada para el pago, usted recibe: <br> <br>\
+                Hoy $8.000 y en 10 semanas $40.000. Total $48.000 <br> <br>\
+                ¿Está seguro de su elección? </p>";
               break;
            }
            case 6: {
               document.getElementById("select-text").innerHTML =
-                "<p>Usted seleccionó la opción 6, hoy recibé $0 y en {{Constants.semanas}}\
-                 semanas, rebirá $50.000. </br> Para un total de $50.000. </p>";
+                "<p> Ha seleccionado la opción 1. Es decir, si esta pregunta es seleccionada para el pago, usted recibe: <br> <br>\
+                Hoy $0 y en 10 semanas $50.000. Total $50.000 <br> <br>\
+                ¿Está seguro de su elección? </p>";
               break;
            }
         }
@@ -81,51 +87,67 @@
         <tr>
             <td rowspan="6" class="col-sm-4 ancho"> <img src = "{% static 'CTB/8.PNG' %}" alt=""> </td>
             <td>
-                <button type="button" class="btn btn-outline-success" onclick="btn(1); clickaction(1)">
+                <button type="button" class="btn btn-outline-success" onclick="btn(1); clickaction(1)" data-toggle="modal" data-target="#staticBackdrop">
                     Opción 1
                 </button>
             </td>
         </tr>
         <tr>
             <td>
-                <button type="button" class="btn btn-outline-success" onclick="btn(2); clickaction(2)">
+                <button type="button" class="btn btn-outline-success" onclick="btn(2); clickaction(2)" data-toggle="modal" data-target="#staticBackdrop">
                     Opción 2
                 </button>
             </td>
         </tr>
         <tr>
             <td>
-                <button type="button" class="btn btn-outline-success" onclick="btn(3); clickaction(3)">
+                <button type="button" class="btn btn-outline-success" onclick="btn(3); clickaction(3)" data-toggle="modal" data-target="#staticBackdrop">
                     Opción 3
                 </button>
             </td>
         </tr>
         <tr>
             <td>
-                <button type="button" class="btn btn-outline-success" onclick="btn(4); clickaction(4)">
+                <button type="button" class="btn btn-outline-success" onclick="btn(4); clickaction(4)" data-toggle="modal" data-target="#staticBackdrop">
                     Opción 4
                 </button>
             </td>
         </tr>
         <tr>
-            <td> <button type="button" class="btn btn-outline-success" onclick="btn(5); clickaction(5)">
+            <td> <button type="button" class="btn btn-outline-success" onclick="btn(5); clickaction(5)" data-toggle="modal" data-target="#staticBackdrop">
                     Opción 5
                 </button>
             </td>
         </tr>
         <tr>
             <td>
-                <button type="button" class="btn btn-outline-success" onclick="btn(6); clickaction(6)">
+                <button type="button" class="btn btn-outline-success" onclick="btn(6); clickaction(6)" data-toggle="modal" data-target="#staticBackdrop">
                     Opción 6
                 </button>
             </td>
         </tr>
     </table>
 
-    <p class="opcion" id="select-text"> </p>
-
     <input type="hidden" name="rta_8" id="rta_8" />
 
-    <button class="btn btn-primary otree-btn" onclick="confirmar()"> Siguiente </button>
+    <div class="modal fade" id="staticBackdrop" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">Confirme su elección</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p class="opcion" id="select-text"> </p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal"> No </button>
+            <button class="btn btn-primary otree-btn"> Si </button>
+          </div>
+        </div>
+      </div>
+    </div>
 
 {% endblock %}

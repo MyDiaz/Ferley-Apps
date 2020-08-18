@@ -22,7 +22,7 @@ Informalidad Laboral: Movilidad y Observabilidad Laboral
 class Constants(BaseConstants):
     name_in_url = 'Torneo'
     players_per_group = 4
-    num_rounds = 6
+    num_rounds = 2
     pago_A = c(2000)
     pago_B = c(1000)
     ronda_pagar = randint(2, num_rounds+1)
@@ -119,8 +119,12 @@ class Subsession(BaseSubsession):
         for j in self.get_players():
             j.set_pago_ronda()
             j.set_posicion_grupo()
-            j.set_posicion_contrato(),
+            j.set_posicion_contrato()
             j.set_probabilidad_contrato_A()
+
+    def set_pago_jugadores(self):
+        for j in self.get_players():
+            j.set_pago()
 
 class Group(BaseGroup):
     #solo deben declararse variables por medio de models.
@@ -179,16 +183,22 @@ class Player(BasePlayer):
     posicion_grupo = models.IntegerField() #De 1-4
     posicion_contrato = models.IntegerField() #De 1-2
     posicion_contrato_torneo = models.IntegerField() #De 1-2
-    pago = models.CurrencyField()
     pago_ronda = models.CurrencyField()
+    pago = models.CurrencyField()
 
     #Esta función define el pago final
-    def set_pagar_jugador(self):
-        jugadores = self.get.players()
-        ronda = self.subsession.get_ronda_pagar()
-        for j in jugadores:
-            j.pago = j.pago_ronda.in_all_rounds()[ronda - 1]
-
+    def set_pago(self):
+        if (self.round_number==Constants.num_rounds):
+#           jugadores = self.get_players()
+            ronda = self.subsession.ronda_pagar
+            pagos_rondas = []
+            for j in self.in_all_rounds():
+                pagos_rondas.append([j.pago_ronda])
+            self.pago= pagos_rondas[ronda - 1]
+        else:
+            self.pago= 0
+ #           j.pago = j.pago_ronda.in_all_rounds()[ronda - 1]
+        
     def set_probabilidad_contrato_A(self):
         if self.subsession.observabilidad == True:
             self.probabilidad_contrato_A = self.palabras / self.group.get_palabras_torneo()
@@ -232,3 +242,4 @@ class Player(BasePlayer):
         else:
             self.pago_ronda = Constants.pago_B * self.palabras
         # cantidad de dinero que recibiría el jugador si la ronda actual es elegida para ser pagada
+ 

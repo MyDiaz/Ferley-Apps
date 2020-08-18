@@ -81,6 +81,8 @@ class resultados_torneo(Page):
         }
 
 class asignacion(Page):
+    def is_displayed(self):
+        return self.round_number < Constants.num_rounds
     def vars_for_template(self): 
         return {
             "ronda": self.round_number,
@@ -93,8 +95,14 @@ class espera_grupos(WaitPage):
     wait_for_all_groups = True
     after_all_players_arrive = 'creating_groups'
     def is_displayed(self):
-        return self.round_number < 6
-    
+        return self.round_number < Constants.num_rounds
+
+class espera_pago_total(WaitPage):
+    wait_for_all_groups = True
+    def after_all_players_arrive(self):
+        self.subsession.set_pago_jugadores()
+    def is_displayed(self):
+        return self.round_number == Constants.num_rounds 
 		
 class pago_total(Page):
     def is_displayed(self):
@@ -102,7 +110,7 @@ class pago_total(Page):
     def vars_for_template(self): 
         return {
             "ronda_pagar" :  Constants.ronda_pagar - 1,
-            "pago_total" : 'set_pagar_jugador',
+            "pago_total" : self.player.pago,
             #"palabras" : 
             #"contrato_A" : 
         }
@@ -127,6 +135,7 @@ page_sequence = [
     resultados_torneo,
     asignacion,
     espera_grupos,
+    espera_pago_total,
 	pago_total,
     gracias,
 ]

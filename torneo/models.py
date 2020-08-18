@@ -8,7 +8,6 @@ from otree.api import (
     Currency as c,
     currency_range,
 )
-from random import randint
 import numpy as np
 import random
 import json
@@ -22,10 +21,10 @@ Informalidad Laboral: Movilidad y Observabilidad Laboral
 class Constants(BaseConstants):
     name_in_url = 'Torneo'
     players_per_group = 4
-    num_rounds = 2
+    num_rounds = 6
     pago_A = c(2000)
     pago_B = c(1000)
-    ronda_pagar = randint(2, num_rounds+1)
+    ronda_pagar = random.randint(2, num_rounds)
 
 class Subsession(BaseSubsession):
     meritocracia = models.BooleanField()
@@ -143,7 +142,8 @@ class Group(BaseGroup):
         return palabras_torneo
 
     def set_asignar_contrato_A(self):
-        rankA, rankB = self.get_ranking_group()
+        rankA = json.loads(self.rankA)
+        rankB = json.loads(self.rankB)
         p2 = self.get_player_by_id(int(rankA.keys()[1].split('j')[1]))
         p3 = self.get_player_by_id(int(rankB.keys()[0].split('j')[1]))
         self.ganador_contrato_A = random.choices([rankA.keys()[1].split('j')[1], rankB.keys()[0].split('j')[1]],
@@ -193,7 +193,7 @@ class Player(BasePlayer):
             ronda = self.subsession.ronda_pagar
             pagos_rondas = []
             for j in self.in_all_rounds():
-                pagos_rondas.append([j.pago_ronda])
+                pagos_rondas.append(j.pago_ronda)
             self.pago= pagos_rondas[ronda - 1]
         else:
             self.pago= 0

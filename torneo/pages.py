@@ -110,9 +110,7 @@ class pago_total(Page):
     def vars_for_template(self): 
         return {
             "ronda_pagar" :  Constants.ronda_pagar - 1,
-            "pago_total" : self.player.pago,
-            #"palabras" : 
-            #"contrato_A" : 
+            "pago_total" : self.player.pago.to_real_world_currency(self.session)
         }
     
 class gracias(Page):

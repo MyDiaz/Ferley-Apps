@@ -88,7 +88,7 @@ USE_POINTS = True
 
 ROOMS = []
 
-ADMIN_USERNAME = 'admin'
+ADMIN_USERNAME = 'Ferley Rincon'
 # for security, best to set admin password in an environment variable
 ADMIN_PASSWORD = environ.get('OTREE_ADMIN_PASSWORD')
 

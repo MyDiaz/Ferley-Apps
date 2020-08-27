@@ -62,7 +62,7 @@ class tarea_torneo(Page):
         return {'legend_list': legend_list,
                 'task_list': task_list,
                 'task_width': task_width,
-                "pago_A": Constants.pago_A ,
+                 "pago_A": Constants.pago_A ,
                 "pago_B": Constants.pago_B,
                 "contrato_A": self.player.contrato_A}
 

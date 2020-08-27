@@ -25,6 +25,9 @@ class Constants(BaseConstants):
     pago_A = c(2000)
     pago_B = c(1000)
     ronda_pagar = random.randint(2, num_rounds)
+    letters_per_word = 5
+    use_timeout = True
+    seconds_per_period = 90
 
 class Subsession(BaseSubsession):
     meritocracia = models.BooleanField()
@@ -177,7 +180,7 @@ class Group(BaseGroup):
 
 class Player(BasePlayer):
     contrato_A = models.BooleanField()
-    palabras = models.IntegerField() 
+    palabras = models.IntegerField(initial=0) 
     probabilidad_contrato_A = models.FloatField()
     contrato_A_torneo = models.BooleanField()
     posicion_grupo = models.IntegerField() #De 1-4
@@ -185,6 +188,7 @@ class Player(BasePlayer):
     posicion_contrato_torneo = models.IntegerField() #De 1-2
     pago_ronda = models.CurrencyField()
     pago = models.CurrencyField()
+    mistakes = models.IntegerField(initial=0)
 
     #Esta función define el pago final
     def set_pago(self):
@@ -238,8 +242,6 @@ class Player(BasePlayer):
                 self.contrato_A_torneo = False
                 self.posicion_contrato_torneo = 1
 
-    def set_palabras_azar(self):
-        self.palabras = np.random.randint(1, 10)  ##Tarea de odificación palabras
 
     def set_pago_ronda(self):
         if (self.contrato_A):

@@ -27,23 +27,51 @@ class instrucciones_torneo(Page):
         return {
             "observabilidad" : self.session.config["observabilidad"]
         }
-            
+
 class tarea_practica(Page):
-    timeout_seconds = 90
     def is_displayed(self):
         return self.round_number == 1
-    def vars_for_template(self):
-        self.player.set_palabras_azar()
-        return {
-            "palabras" : self.player.palabras
-        }
 
+    form_model = 'player'
+    form_fields = ['palabras', 'mistakes']
+    if Constants.use_timeout:
+        timeout_seconds = Constants.seconds_per_period
+
+    def vars_for_template(self):
+        legend_list = [j for j in range(5)]
+        task_list = [j for j in range(Constants.letters_per_word)]
+        task_width = 90 / Constants.letters_per_word
+        return {'legend_list': legend_list,
+                'task_list': task_list,
+                'task_width': task_width,
+                "pago_A": Constants.pago_A ,
+                "pago_B": Constants.pago_B,
+                "contrato_A": self.player.contrato_A
+                }
+
+            
 class tarea_torneo(Page):
+    def is_displayed(self):
+        return self.round_number == 1
+
+    form_model = 'player'
+    form_fields = ['palabras', 'mistakes']
+    if Constants.use_timeout:
+        timeout_seconds = Constants.seconds_per_period
+
+    def vars_for_template(self):
+        legend_list = [j for j in range(5)]
+        task_list = [j for j in range(Constants.letters_per_word)]
+        task_width = 90 / Constants.letters_per_word
+        return {'legend_list': legend_list,
+                'task_list': task_list,
+                'task_width': task_width}
+
+class tarea_torneo_2(Page):
     timeout_seconds = 90
     def is_displayed(self):
         return self.round_number > 1
     def vars_for_template(self):
-        self.player.set_palabras_azar()
         return {
             "palabras" : self.player.palabras,
             "pago_A": Constants.pago_A ,

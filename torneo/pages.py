@@ -44,15 +44,11 @@ class tarea_practica(Page):
         return {'legend_list': legend_list,
                 'task_list': task_list,
                 'task_width': task_width,
-                "pago_A": Constants.pago_A ,
-                "pago_B": Constants.pago_B,
-                "contrato_A": self.player.contrato_A
                 }
-
-            
+           
 class tarea_torneo(Page):
     def is_displayed(self):
-        return self.round_number == 1
+        return self.round_number > 1
 
     form_model = 'player'
     form_fields = ['palabras', 'mistakes']
@@ -65,19 +61,10 @@ class tarea_torneo(Page):
         task_width = 90 / Constants.letters_per_word
         return {'legend_list': legend_list,
                 'task_list': task_list,
-                'task_width': task_width}
-
-class tarea_torneo_2(Page):
-    timeout_seconds = 90
-    def is_displayed(self):
-        return self.round_number > 1
-    def vars_for_template(self):
-        return {
-            "palabras" : self.player.palabras,
-            "pago_A": Constants.pago_A ,
-            "pago_B": Constants.pago_B,
-            "contrato_A": self.player.contrato_A
-        }
+                'task_width': task_width,
+                "pago_A": Constants.pago_A ,
+                "pago_B": Constants.pago_B,
+                "contrato_A": self.player.contrato_A}
 
 class calculos(WaitPage):
     wait_for_all_groups = True
@@ -91,13 +78,15 @@ class resultados_practica(Page):
         return self.round_number == 1
     def vars_for_template(self):
         return {
-            "palabras" : self.player.palabras,
+            "palabras": self.player.palabras,
+            "ronda": self.round_number - 1,
         }
 
 class resultados_torneo(Page):
     def is_displayed(self):
         return self.round_number > 1
     def vars_for_template(self):
+        self.player.palabras = self.player.in_round(round_number).palabras
         return {
             "ronda": self.round_number - 1, #Restar 1 al número de rondas. Ronda 0 = Práctica
             "palabras" : self.player.palabras,
@@ -115,8 +104,6 @@ class asignacion(Page):
         return {
             "ronda": self.round_number,
             "contrato_A_torneo" : self.player.contrato_A_torneo,
-            #"palabras" : 
-            #"contrato_A" : 
         }
 
 class espera_grupos(WaitPage):

@@ -27,7 +27,7 @@ class Constants(BaseConstants):
     ronda_pagar = random.randint(2, num_rounds)
     letters_per_word = 5
     use_timeout = True
-    seconds_per_period = 90
+    seconds_per_period = 30
 
 class Subsession(BaseSubsession):
     meritocracia = models.BooleanField()
@@ -204,15 +204,15 @@ class Player(BasePlayer):
  #           j.pago = j.pago_ronda.in_all_rounds()[ronda - 1]
         
     def set_probabilidad_contrato_A(self):
-        if self.subsession.observabilidad == True:
-            if (self.contrato_A == True and self.posicion_contrato == 1):
+        if (self.contrato_A == True and self.posicion_contrato == 1):
                 self.probabilidad_contrato_A = 1
-            elif (self.contrato_A == False and self.posicion_contrato == 2):
+        elif (self.contrato_A == False and self.posicion_contrato == 2):
                 self.probabilidad_contrato_A = 0
-            else:
-                self.probabilidad_contrato_A = self.palabras / self.group.get_palabras_torneo()
         else:
-            self.probabilidad_contrato_A = 0.5
+            if self.subsession.observabilidad == True:
+                self.probabilidad_contrato_A = self.palabras / self.group.get_palabras_torneo()
+            else:
+                self.probabilidad_contrato_A = 0.5
 
     def set_posicion_grupo(self):
         rank = json.loads(self.group.rank)
@@ -248,5 +248,4 @@ class Player(BasePlayer):
             self.pago_ronda = Constants.pago_A * self.palabras
         else:
             self.pago_ronda = Constants.pago_B * self.palabras
-        # cantidad de dinero que recibiría el jugador si la ronda actual es elegida para ser pagada
  

@@ -128,7 +128,7 @@ td {
 {% endblock %}
 
 {% block content %}
-<input type="hidden" name="performance" id="performance" value="" />
+<input type="hidden" name="palabras" id="palabras" value="" />
 <input type="hidden" name="mistakes" id="mistakes" value="" />
 
 <div class="test" id="hide_task">
@@ -203,8 +203,8 @@ function myFunction() {
     errors=checkSolution();
 
   if (errors == 0) {
-      var temp = Number(document.getElementById("performance").value) + 1
-      document.getElementById("performance").value = temp;
+      var temp = Number(document.getElementById("palabras").value) + 1
+      document.getElementById("palabras").value = temp;
       document.getElementById("error-form").style.display = "none";
 
       word = genNewWord();
@@ -232,7 +232,7 @@ function myFunction() {
       document.getElementById("error-form").style.display = "block";
   }
   else {
-        document.getElementById("performance").value = "0";
+        document.getElementById("palabras").value = "0";
   }
 }
 

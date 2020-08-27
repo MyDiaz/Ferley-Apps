@@ -86,7 +86,6 @@ class resultados_torneo(Page):
     def is_displayed(self):
         return self.round_number > 1
     def vars_for_template(self):
-        self.player.palabras = self.player.in_round(round_number).palabras
         return {
             "ronda": self.round_number - 1, #Restar 1 al número de rondas. Ronda 0 = Práctica
             "palabras" : self.player.palabras,
